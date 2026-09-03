@@ -1,0 +1,36 @@
+// .devcontainer/devcontainer.json
+//
+// Stack-agnostic base image — add a language-specific feature (node, python,
+// go, etc.) per project rather than baking one in here, so this file works
+// unchanged across projects.
+{
+  "name": "dev",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+ 
+  "features": {
+    // Required by the claude-code feature below if the base image has no
+    // Node.js. Safe to remove if your chosen base/language feature already
+    // provides Node (e.g. a javascript-node or typescript-node image).
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+ 
+  // Reuse your host's gh and Claude Code auth instead of logging in fresh
+  // inside every container. Comment out any line for state you'd rather
+  // keep container-local.
+  "mounts": [
+    "source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.claude.json,target=/home/vscode/.claude.json,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": "gh --version && claude --version",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.vscode-pull-request-github"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
