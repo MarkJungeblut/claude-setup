@@ -30,8 +30,11 @@ The plan must include:
 - Explicit acceptance criteria: what must be true for this to be done.
 - What is explicitly out of scope for this increment.
 
-Write the plan to the Claude plans file. Exit plan mode and wait for the user
-to approve before writing any code. Do not proceed on assumption of approval.
+Exit plan mode with the approved plan content. Write that content to
+docs/plans/current-plan.md (overwrite if it already exists from a prior
+increment). This is the canonical location for the in-progress plan — the
+review skill reads from here, so it must exist at this exact path before
+implementation begins. Wait for the user to approve before writing any code.
 
 ## Step 4 — Implement
 Execute the approved plan exactly as approved. Implement exactly what was
@@ -56,15 +59,17 @@ Step 6 until the user confirms the review has been run and issues addressed.
 
 ## Step 6 — Archive the plan
 1. List docs/plans/ to find the highest existing plan number.
-2. Increment by 1 and create docs/plans/NNNN-<slug>.md.
-3. Copy the session plan file content verbatim — do NOT rewrite or recreate it
-   from docs/plans/_template.md. The archive must preserve all design decisions,
-   context, and detail exactly as implemented, including the alternatives
-   considered in Step 3.
-4. Prepend this frontmatter block:
-     ---
-     status: Completed
-     created: <date work started>
-     updated: <today>
-     ---
-5. Commit the archive file together with any other final tidy-up commits.
+2. Copy docs/plans/_template.md to docs/plans/NNNN-<slug>.md, where NNNN is
+   the next number.
+3. In the new file, replace the
+   `<!-- Copy the implemented session plan verbatim above this line, then
+   adjust the frontmatter. -->` comment with the full content of
+   docs/plans/current-plan.md, then remove the comment itself. Preserve all
+   design decisions, context, and detail exactly as implemented, including
+   the alternatives considered in Step 3 — do not summarize or rewrite.
+4. Update the frontmatter: set `created` to the date work started and
+   `updated` to today. Leave `status` as the template's default unless the
+   increment was abandoned rather than completed.
+5. Delete docs/plans/current-plan.md now that it's archived, so the next
+   increment starts clean and the review skill never reads a stale plan.
+6. Commit the archive file together with any other final tidy-up commits.
