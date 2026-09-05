@@ -24,9 +24,9 @@ Do NOT start implementing on main.
 Enter plan mode. Explore the codebase and design the implementation.
 
 The plan must include:
-- The approach, and what alternatives were considered and rejected, and why
-  (per the guidelines' "Proposing Alternatives" rule — this is not optional,
-  even for a plan that feels obvious).
+- The approach, plus alternatives considered, per "Proposing Alternatives" in
+  @docs/guidelines/ai-collaboration.md — this is not optional, even for a plan
+  that feels obvious.
 - Explicit acceptance criteria: what must be true for this to be done.
 - What is explicitly out of scope for this increment.
 
@@ -42,21 +42,17 @@ Present the plan and wait for the user to approve it. Only once they have:
 Do not write any code — including the plan file — before that approval.
 
 ## Step 4 — Implement
-Execute the approved plan exactly as approved. Implement exactly what was
-scoped — no gold-plating, no unrequested extras. If something adjacent looks
-broken or suboptimal, flag it to the user rather than fixing it silently.
+Execute the approved plan exactly as approved, observing "Scope" and
+"Incremental Changes" in @docs/guidelines/ai-collaboration.md. If the task
+turns out larger than the plan assumed, stop and confirm direction before
+continuing.
 
-Keep changes small. If the task is larger than expected mid-implementation,
-stop and confirm direction with the user before continuing, per the
-incremental-changes rule.
-
-Write tests alongside or after implementation per the Test Requirements table
-in the guidelines. No new logic ships without tests.
+Write tests per "Test Requirements" in @docs/guidelines/ai-collaboration.md.
 
 ## Step 5 — Verify definition of done
-Before archiving, confirm every item in the guidelines' Definition of Done:
-build succeeds, all tests pass, lint and format checks pass. Do not proceed
-to archiving on a red build or a "should be fine."
+Before archiving, confirm every item in "Definition of Done" in
+@docs/guidelines/ai-collaboration.md. Do not proceed to archiving on a red
+build or a "should be fine."
 
 Stop here and tell the user: "Implementation complete and definition of done
 verified. Run /review-implementation before archiving." Do not proceed to
