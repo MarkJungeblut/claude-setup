@@ -30,11 +30,16 @@ The plan must include:
 - Explicit acceptance criteria: what must be true for this to be done.
 - What is explicitly out of scope for this increment.
 
-Exit plan mode with the approved plan content. Write that content to
-docs/plans/current-plan.md (overwrite if it already exists from a prior
-increment). This is the canonical location for the in-progress plan — the
-review skill reads from here, so it must exist at this exact path before
-implementation begins. Wait for the user to approve before writing any code.
+Present the plan and wait for the user to approve it. Only once they have:
+
+1. Exit plan mode with the approved plan content.
+2. Write that content to docs/plans/current-plan.md (overwrite if it already
+   exists from a prior increment). This is the canonical location for the
+   in-progress plan — the review skill reads from this exact path, so it must
+   exist before implementation begins. The file is gitignored; the archived
+   copy written in Step 6 is the durable record.
+
+Do not write any code — including the plan file — before that approval.
 
 ## Step 4 — Implement
 Execute the approved plan exactly as approved. Implement exactly what was
@@ -56,6 +61,10 @@ to archiving on a red build or a "should be fine."
 Stop here and tell the user: "Implementation complete and definition of done
 verified. Run /review-implementation before archiving." Do not proceed to
 Step 6 until the user confirms the review has been run and issues addressed.
+
+/review-implementation checks the diff against the plan — scope, acceptance
+criteria, missing work. It is not a correctness audit. For anything with
+non-trivial logic, suggest /code-review as well; the two are complementary.
 
 ## Step 6 — Archive the plan
 1. List docs/plans/ to find the highest existing plan number.

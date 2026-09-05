@@ -16,12 +16,15 @@ Always note what alternatives were considered and why the recommended approach w
 A task is complete only when **all** of the following are true:
 
 - The project **builds** successfully (for the layer(s) touched).
+- **Typechecks pass**, where the language has a separate typecheck step from
+  the build.
 - **All tests pass** — new logic requires new tests.
 - **Lint and format checks pass**, using whatever tooling this project defines
-  for the layer(s) touched. Check the project's config files (e.g.
-  `package.json` scripts, `Makefile`, `pyproject.toml`, CI config) for the
-  exact commands rather than assuming a fixed toolchain — every project this
-  applies to may use a different one.
+  for the layer(s) touched. Take the exact commands from the commands table
+  in `CLAUDE.md`; if it's incomplete, fall back to the project's config files
+  (`package.json` scripts, `Makefile`, `pyproject.toml`, CI config) and record
+  what you find in that table. Never assume a fixed toolchain — every project
+  this applies to may use a different one.
 
 ## Test Requirements
 

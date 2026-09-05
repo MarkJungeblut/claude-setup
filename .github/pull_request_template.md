@@ -14,6 +14,7 @@ _How was this verified? e.g. new/updated automated tests, manual steps taken loc
 
 ## Definition of Done
 - [ ] Build passes
+- [ ] Typecheck passes (where separate from the build)
 - [ ] All tests pass (new logic has new tests)
 - [ ] Lint checks pass
 - [ ] Format checks pass
