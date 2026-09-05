@@ -49,6 +49,14 @@ continuing.
 
 Write tests per "Test Requirements" in @docs/guidelines/ai-collaboration.md.
 
+Commit the work before moving on, using the Conventional Commits format from
+@docs/guidelines/git-workflow.md. This is not optional bookkeeping: the review
+in Step 5 reads the branch diff, and `git diff` cannot see untracked files, so
+anything added but never committed — typically the new modules and their tests,
+i.e. most of the implementation — is invisible to the reviewer. It would then
+review a partial diff without knowing it. Commit as you go for a larger
+increment; the branch is squash-merged in Step 7, so granularity costs nothing.
+
 ## Step 5 — Verify definition of done
 Before archiving, confirm every item in "Definition of Done" in
 @docs/guidelines/ai-collaboration.md. Do not proceed to archiving on a red
