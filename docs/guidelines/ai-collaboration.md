@@ -25,7 +25,14 @@ A task is complete only when **all** of the following are true:
 
 ## Test Requirements
 
-All new code requires tests. No exceptions.
+All new code requires tests, with one exception: purely presentational UI
+components (props in, markup out — no conditionals, derived state, event
+handlers with logic, validation, or data fetching) don't need tests. They
+change shape often as designs evolve, and a test on pure markup breaks on
+every restyle without ever catching a real regression.
+
+Once a component has logic — a branch, a calculation, a state transition, an
+error path — it needs a test, same as any other code.
 
 Test behavior, not implementation. For UI code, query by accessible
 roles/text rather than internal state, markup structure, or styling classes.

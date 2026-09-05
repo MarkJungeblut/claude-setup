@@ -68,8 +68,7 @@ Step 6 until the user confirms the review has been run and issues addressed.
    design decisions, context, and detail exactly as implemented, including
    the alternatives considered in Step 3 — do not summarize or rewrite.
 4. Update the frontmatter: set `created` to the date work started and
-   `updated` to today. Leave `status` as the template's default unless the
-   increment was abandoned rather than completed.
+   `updated` to today.
 5. Delete docs/plans/current-plan.md now that it's archived, so the next
    increment starts clean and the review skill never reads a stale plan.
 6. Commit the archive file together with any other final tidy-up commits.
