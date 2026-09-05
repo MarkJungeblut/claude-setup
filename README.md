@@ -59,10 +59,18 @@ Click **Use this template** on GitHub, then work through this checklist:
               ↓
 /code-review            →  built-in correctness pass (complementary)
               ↓
-back to /plan Step 6    →  archive the plan to docs/plans/NNNN-<slug>.md
+back to /plan Step 6-7  →  archive the plan to docs/plans/NNNN-<slug>.md,
+                           then push and open the PR
 ```
 
 `/review-implementation` reads `docs/plans/current-plan.md`, which `/plan`
 writes before implementation and deletes after archiving. That file is
 gitignored — it's transient session state, and the archived copy in
 `docs/plans/` is the durable record.
+
+The review runs in a **fresh** context with no access to the planning
+conversation, and with Edit/Write/Bash withheld. Both are deliberate: a
+reviewer that sat through the implementation can't spot the reasoning it
+already agreed with, and one that can edit tends to fix instead of report.
+It reviews the whole branch (`git merge-base HEAD main`), not just uncommitted
+work, so committing as you go doesn't hide anything from it.

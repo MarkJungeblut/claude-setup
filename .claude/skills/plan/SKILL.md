@@ -63,7 +63,9 @@ criteria, missing work. It is not a correctness audit. For anything with
 non-trivial logic, suggest /code-review as well; the two are complementary.
 
 ## Step 6 — Archive the plan
-1. List docs/plans/ to find the highest existing plan number.
+1. List docs/plans/ to find the highest existing plan number. `_template.md`
+   is not a numbered plan — ignore it. If there are no numbered plans yet,
+   start at 0001.
 2. Copy docs/plans/_template.md to docs/plans/NNNN-<slug>.md, where NNNN is
    the next number.
 3. In the new file, replace the
@@ -77,3 +79,21 @@ non-trivial logic, suggest /code-review as well; the two are complementary.
 5. Delete docs/plans/current-plan.md now that it's archived, so the next
    increment starts clean and the review skill never reads a stale plan.
 6. Commit the archive file together with any other final tidy-up commits.
+
+## Step 7 — Open the pull request
+The branch from Step 2 is not the deliverable — `main` is protected and all
+changes land through a PR, per "Pull Request Process" in
+@docs/guidelines/git-workflow.md. Leaving the branch sitting locally leaves
+the increment unfinished.
+
+Pushing and opening a PR is outward-facing, so ask the user before doing it
+rather than assuming. Once they confirm:
+
+1. Push the branch and open the PR with `gh pr create`.
+2. Fill in .github/pull_request_template.md rather than writing a free-form
+   body: summary, the type of change (matching the branch type from Step 2),
+   and a test plan describing how the Definition of Done was verified in
+   Step 5.
+
+Then hand back to the user — CI, review, approval, and the squash merge are
+theirs. Do not merge the PR.
