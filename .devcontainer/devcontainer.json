@@ -25,6 +25,12 @@
   // rather keep container-local. Local VS Code/devcontainer CLI only —
   // has no effect in Codespaces (no shared host filesystem there; use the
   // "secrets" block below instead).
+  //
+  // Note that the ~/.claude mount shares the whole directory, not just
+  // credentials: session transcripts under projects/, memory, and your user
+  // settings and skills from every other repo are visible inside this
+  // container, and changes made here write back to the host. That's usually
+  // what you want. If it isn't, drop that line and log in per container.
   "mounts": [
     "source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached",
     "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
