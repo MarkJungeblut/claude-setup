@@ -1,24 +1,54 @@
 ---
 name: review-implementation
 description: Independently review the current implementation against its plan for correctness, edge cases, and scope creep
-context: fork
-agent: Explore
+agent: general-purpose
+allowed-tools: Read, Grep, Glob
 background: false
 disable-model-invocation: true
 ---
+
+<!--
+Frontmatter notes — these choices are load-bearing, don't "tidy" them away:
+
+- No `context:` key, so the reviewer starts from a fresh context. It must NOT
+  inherit this session's conversation: the planning discussion and the
+  reasoning used to justify the implementation are exactly the contamination
+  the "independent reviewer" framing below is guarding against.
+- `general-purpose` rather than `Explore`, because this is a judgement task
+  (per-criterion pass/fail, edge cases, test quality), not a code search.
+- `allowed-tools` withholds Edit/Write/Bash, so read-only is structural rather
+  than a request the model can talk itself out of. The diff is injected below,
+  so the reviewer needs no shell of its own.
+-->
 
 ## Plan for this increment
 @docs/plans/current-plan.md
 
 ## Implementation diff
-!`git diff HEAD`
+!`git diff $(git merge-base HEAD main)`
 
 ## Changed files
-!`git diff --name-only HEAD`
+!`git diff --name-only $(git merge-base HEAD main)`
 
 ## Your task
 
-You are reviewing this implementation as an independent reviewer with no
+First, check that the plan section above actually contains a plan. If it is
+empty or missing — docs/plans/current-plan.md does not exist, because it was
+already archived or /plan was never run for this increment — stop immediately
+and report exactly that. Do not review the diff against nothing, and do not
+reconstruct the plan from the diff: a review that infers intent from the code
+it is reviewing cannot detect missing work or scope creep, which is most of
+what this review is for.
+
+Second, check that the diff section above is non-empty. If it is empty, stop
+and report exactly that — do not report the acceptance criteria as passing.
+An empty diff means the review is looking at nothing, not that the work is
+clean. Likely causes: the branch has no commits and no working-tree changes
+yet, or the `git merge-base HEAD main` above failed because this project's
+trunk is not called `main` or exists only as `origin/main` (say so, and name
+the branch it should be compared against instead).
+
+Otherwise, review this implementation as an independent reviewer with no
 prior context on this project beyond what's above. Do not assume anything
 was discussed elsewhere — evaluate only against the plan and the diff.
 

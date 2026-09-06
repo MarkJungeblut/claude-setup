@@ -33,16 +33,17 @@ Examples: `feat/task-list-api`, `fix/auth-token-expiry`, `chore/update-dependenc
 
 Examples:
 ```
-feat(home): add hero section with couple names and CTA
+feat(auth): add password reset via email link
 fix(nav): correct active route highlight on bottom navigation
-chore: upgrade vite to 6.1.0
+chore: upgrade build tooling to latest minor
 ```
 
 ## Pull Request Process
 
 1. Branch from `main`; keep PRs small and focused.
 2. Fill in the PR template (summary, type of change, test plan).
-3. CI must pass (build + tests for both stacks) before merge.
+3. CI must pass before merge — every gate in the Definition of Done, for
+   every layer the PR touches.
 4. At least **1 approval** required before merging.
 5. Merge strategy: **Squash and merge** to keep `main` history linear.
 6. Delete the branch after merge.
